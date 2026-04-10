@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+:root {
+  /* Color Palette — Warm Terracotta × Sage × Champagne */
+  --color-primary: #C07850;    /* Warm Terracotta          */
+  --color-secondary: #8BA888;  /* Soft Sage Green          */
+  --color-accent: #E8D5C0;     /* Champagne / Warm Sand    */
+  --color-background: #FAF6F0; /* Warm Cream               */
+  --color-surface: #FFFFFF;    /* Pure White               */
+  --color-text-main: #2D1F1A;  /* Deep Espresso Brown      */
+  --color-text-light: #7A6458; /* Muted Warm Brown-Grey    */
+  --color-border: #DEC9B3;     /* Light Sand Border        */
+                                         
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+                                           
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(192, 120, 80, 0.12);
+  --shadow-md: 0 4px 12px rgba(192, 120, 80, 0.22);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-sm);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--transition-speed) ease;
+}
+
+/* Common Layout Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Primary Button Style */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: #a8633e;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: #fff;
+}
+
+/* Secondary Button Style */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent);
+}

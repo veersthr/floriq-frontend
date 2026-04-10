@@ -1,0 +1,168 @@
+/* ============================================================
+   HERO CAROUSEL
+   ============================================================ */
+.hero-carousel {
+  position: relative;
+  height: 88vh;
+  min-height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Slide backgrounds – stacked, only active is visible */
+.carousel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+  transform: scale(1.04);
+  animation: none;
+}
+
+.carousel-bg.active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 6s ease-out;
+}
+
+/* Dark gradient overlay */
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.52) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Slide Content ── */
+.carousel-content {
+  position: relative;
+  z-index: 2;
+  max-width: 660px;
+  padding: 0 1.5rem;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.carousel-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carousel-content.fade-out {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.carousel-content h1 {
+  color: #fff;
+  font-size: 3.8rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.3);
+  letter-spacing: -0.5px;
+}
+
+.carousel-content p {
+  font-size: 1.15rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  line-height: 1.7;
+}
+
+.hero-btn {
+  font-size: 1rem;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(255,105,180,0.35);
+}
+
+
+
+/* ============================================================
+   FEATURED / SHOP COLLECTION SECTION
+   ============================================================ */
+.section-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+.section-header p {
+  color: var(--color-text-light);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.view-all {
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.about-section {
+  background-color: var(--color-accent);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.about-content {
+  max-width: 800px;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-main);
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: var(--color-text-main);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .carousel-content h1 {
+    font-size: 2.4rem;
+  }
+
+  .carousel-content p {
+    font-size: 1rem;
+  }
+
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .carousel-arrow.left  { left: 12px; }
+  .carousel-arrow.right { right: 12px; }
+}
