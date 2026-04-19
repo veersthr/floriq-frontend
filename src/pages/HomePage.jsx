@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import { products } from '../data/products';
+import './HomePage.css';
 import './HomePage.css';
 
 const slides = [
@@ -14,21 +14,21 @@ const slides = [
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1487530811015-780ca5a94c2a?auto=format&fit=crop&w=1600&q=80',
+    image: 'https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?auto=format&fit=crop&w=1600&q=80',
     heading: 'Fresh from the Garden',
     subtext: 'Hand-picked, sustainably sourced blooms that bring the garden straight into your home.',
     accent: 'rgba(164,180,148,0.22)',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1561181286-d3f5c0d0b671?auto=format&fit=crop&w=1600&q=80',
+    image: 'https://images.unsplash.com/photo-1621628521890-ebbf656c6a32?auto=format&fit=crop&w=1600&q=80',
     heading: 'Celebrate Every Moment',
     subtext: 'From birthdays to anniversaries — let our bouquets speak the words you feel.',
     accent: 'rgba(255,200,100,0.18)',
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1490750967868-88df5691cc78?auto=format&fit=crop&w=1600&q=80',
+    image: 'https://images.unsplash.com/photo-1653262343155-dc4e12bd36fd?auto=format&fit=crop&w=1600&q=80',
     heading: 'Gift Someone Special',
     subtext: 'A thoughtful bouquet says more than words. Make someone smile today.',
     accent: 'rgba(255,130,160,0.18)',
@@ -38,11 +38,29 @@ const slides = [
 const INTERVAL = 4000;
 
 const HomePage = () => {
-  const featuredProducts = products.slice(0, 3);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
+    // Fetch products
+    const fetchProducts = async () => {
+      try {
+        console.log('Fetching products from: http://localhost:5001/api/products');
+        const response = await fetch('http://localhost:5001/api/products');
+        console.log('Response status:', response.status);
+        const data = await response.json();
+        console.log('Received data:', data);
+        // Just take the first 3 for trending
+        if (data.length > 0) {
+          setFeaturedProducts(data.slice(0, 3));
+        }
+      } catch (error) {
+        console.error('Error fetching trending products:', error);
+      }
+    };
+    fetchProducts();
+
     const timer = setInterval(() => {
       setAnimating(true);
       setTimeout(() => {
@@ -68,8 +86,6 @@ const HomePage = () => {
           />
         ))}
 
-        {/* Overlay */}
-        <div className="carousel-overlay" />
 
         {/* Content */}
         <div className={`carousel-content ${animating ? 'fade-out' : 'fade-in'}`}>
@@ -89,11 +105,11 @@ const HomePage = () => {
         </div>
         <div className="featured-grid">
           {featuredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
         <div className="text-center view-all">
-          <Link to="/shop" className="btn-secondary">View All Flowers</Link>
+          <Link to="/shop" className="btn-secondary">View All</Link>
         </div>
       </section>
 

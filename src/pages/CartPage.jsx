@@ -24,18 +24,18 @@ const CartPage = () => {
       <div className="cart-content">
         <div className="cart-items">
           {cartItems.map(item => (
-            <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} className="cart-item-image" />
+            <div key={item._id} className="cart-item">
+              <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
               <div className="cart-item-details">
                 <h3>{item.name}</h3>
                 <p className="cart-item-price">${item.price.toFixed(2)}</p>
                 <div className="cart-item-actions">
                   <div className="quantity-controls">
-                    <button className="qty-btn" onClick={() => updateQuantity(item.id, -1)}><Minus size={16} /></button>
+                    <button className="qty-btn" onClick={() => updateQuantity(item._id, -1)}><Minus size={16} /></button>
                     <span className="qty">{item.quantity}</span>
-                    <button className="qty-btn" onClick={() => updateQuantity(item.id, 1)}><Plus size={16} /></button>
+                    <button className="qty-btn" onClick={() => updateQuantity(item._id, 1)}><Plus size={16} /></button>
                   </div>
-                  <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+                  <button className="remove-btn" onClick={() => removeFromCart(item._id)}>
                     <Trash2 size={18} /> Remove
                   </button>
                 </div>

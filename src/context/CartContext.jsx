@@ -6,7 +6,17 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem('floriq-cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    if (!savedCart) return [];
+    try {
+      const items = JSON.parse(savedCart);
+      // Normalize items: ensure every item has an _id (fallback to id if missing)
+      return items.map(item => ({
+        ...item,
+        _id: item._id || item.id
+      }));
+    } catch (e) {
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -15,10 +25,10 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
+      const existingItem = prev.find(item => item._id === product._id);
       if (existingItem) {
         return prev.map(item => 
-          item.id === product.id 
+          item._id === product._id 
             ? { ...item, quantity: item.quantity + 1 } 
             : item
         );
@@ -28,12 +38,12 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    setCartItems(prev => prev.filter(item => item._id !== id));
   };
 
   const updateQuantity = (id, delta) => {
     setCartItems(prev => prev.map(item => {
-      if (item.id === id) {
+      if (item._id === id) {
         const newQuantity = item.quantity + delta;
         return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
       }

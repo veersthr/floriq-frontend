@@ -35,7 +35,7 @@
 }
 
 /* Dark gradient overlay */
-.carousel-overlay {
+/* .carousel-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -44,6 +44,14 @@
     rgba(0, 0, 0, 0.52) 100%
   );
   z-index: 1;
+} */
+
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: linear-gradient(180deg, white, transparent, transparent, transparent, transparent, transparent, transparent);
 }
 
 /* ── Slide Content ── */

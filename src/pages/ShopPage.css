@@ -22,3 +22,29 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--spacing-lg);
 }
+
+.shop-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.shop-filters select {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: white;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.shop-filters select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(192, 120, 80, 0.1);
+}

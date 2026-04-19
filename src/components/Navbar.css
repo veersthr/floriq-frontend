@@ -1,5 +1,19 @@
 /* ===== NAVBAR ===== */
 .navbar {
+  position: fixed; /* 🔥 important change */
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  height: 70px;
+  background: white;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: none;
+  padding: 0.75rem 0;
+}
+/* .navbar {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -9,7 +23,7 @@
   z-index: 100;
   padding: 0.75rem 0;
   transition: box-shadow 0.3s ease;
-}
+} */
 
 .navbar:hover {
   box-shadow: 0 4px 24px rgba(192, 120, 80, 0.1);
@@ -163,7 +177,7 @@
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 12px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
   background: #fff;
@@ -192,13 +206,114 @@
   white-space: nowrap;
 }
 
-/* ===== CART ===== */
+.profile-menu {
+  min-width: 140px;
+  padding: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.6rem 1.5rem;
+  text-align: left;
+  width: 100%;
+  color: var(--color-text-main);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: rgba(192, 120, 80, 0.08); /* light primary tint */
+  color: var(--color-primary);
+}
+
+/* ===== ACTIONS AREA ===== */
 .nav-actions {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
-.cart-icon-wrapper {
+/* Search Form */
+.search-form {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 0.1rem;
+  transition: all 0.3s ease;
+}
+
+.search-form:focus-within,
+.search-form.has-query {
+  background: var(--color-background);
+  border-color: var(--color-border);
+  padding: 0.1rem 0.5rem 0.2rem 1rem;
+}
+
+.search-form:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(192, 120, 80, 0.1);
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+  transition: width 0.3s ease, padding 0.3s ease;
+  opacity: 0;
+}
+
+.search-form:focus-within .search-input,
+.search-input.has-text {
+  width: 140px;
+  padding: 0.30rem;
+  opacity: 1;
+}
+
+.search-input:focus {
+  width: 180px;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  color: var(--color-text-main);
+  transition: color 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+}
+
+.search-form:focus-within .search-btn,
+.search-form.has-query .search-btn {
+  color: var(--color-primary);
+  padding: 4px;
+}
+
+.search-form:not(:focus-within):not(.has-query) .search-btn:hover {
+  background: rgba(192, 120, 80, 0.1);
+  color: var(--color-primary);
+}
+
+/* Base Icon Wrapper for actions (Profile & Cart) */
+.icon-btn-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -208,11 +323,17 @@
   transition: background 0.25s ease, color 0.25s ease;
 }
 
-.cart-icon-wrapper:hover {
+.icon-btn-wrapper:hover,
+.profile-trigger:hover {
   background: rgba(192, 120, 80, 0.1);
   color: var(--color-primary);
 }
 
+.profile-trigger::after {
+  display: none; /* remove gradient underline on icon */
+}
+
+/* Cart Specific Styles inside wrapper */
 .cart-badge {
   position: absolute;
   top: 0;
