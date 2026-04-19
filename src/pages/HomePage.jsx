@@ -46,8 +46,8 @@ const HomePage = () => {
     // Fetch products
     const fetchProducts = async () => {
       try {
-        console.log('Fetching products from: http://localhost:5001/api/products');
-        const response = await fetch('http://localhost:5001/api/products');
+        console.log(`Fetching products from: ${import.meta.env.VITE_API_BASE_URL}/api/products`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products`);
         console.log('Response status:', response.status);
         const data = await response.json();
         console.log('Received data:', data);

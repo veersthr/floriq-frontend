@@ -14,7 +14,7 @@ export const fetchWithAuth = async (url, options = {}) => {
     headers.Authorization = `Bearer ${userInfo.token}`;
   }
 
-  const response = await fetch(`http://localhost:5001${url}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}${url}`, {
     ...options,
     headers,
   });
