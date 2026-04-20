@@ -1,18 +1,67 @@
 import { useContext, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, ChevronDown, User, Search } from 'lucide-react';
+import { ShoppingCart, ChevronDown, User, Search, Gift, Heart, PartyPopper, Activity, Meh, Cloud, Calendar, Users, Flower } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import './Navbar.css';
+
+const categoriesData = [
+  {
+    id: 'occasions',
+    title: 'Occasions',
+    icon: <Flower size={18} />,
+    items: [
+      { name: 'Birthday', icon: <Gift size={14} /> },
+      { name: 'Anniversary', icon: <Heart size={14} /> },
+      { name: 'Love & Romance', icon: <Heart size={14} /> },
+      { name: 'Congratulations', icon: <PartyPopper size={14} /> },
+      { name: 'Get Well Soon', icon: <Activity size={14} /> },
+      { name: 'Sorry / Apology', icon: <Meh size={14} /> },
+      { name: 'Sympathy & Condolence', icon: <Cloud size={14} /> },
+    ]
+  },
+  {
+    id: 'special-days',
+    title: 'Special Days',
+    icon: <Calendar size={18} />,
+    items: [
+      { name: "Valentine's Day", icon: <Heart size={14} /> },
+      { name: "Mother's Day", icon: <Users size={14} /> },
+      { name: "Father's Day", icon: <User size={14} /> },
+      { name: 'Friendship Day', icon: <Users size={14} /> },
+    ]
+  },
+  {
+    id: 'relations',
+    title: 'Relations',
+    icon: <Users size={18} />,
+    items: [
+      { name: 'For Him', icon: <User size={14} /> },
+      { name: 'For Her', icon: <User size={14} /> },
+    ]
+  }
+];
 
 const Navbar = () => {
   const { itemCount } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [activeMobileSection, setActiveMobileSection] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const inputRef = useRef(null);
+
+  const toggleMobileSection = (sectionId, e) => {
+    e.stopPropagation();
+    setActiveMobileSection(activeMobileSection === sectionId ? null : sectionId);
+  };
+
+  const handleCategoryClick = (categoryName) => {
+    navigate(`/shop?category=${encodeURIComponent(categoryName.toLowerCase())}`);
+    setCategoryOpen(false);
+    setActiveMobileSection(null);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -44,14 +93,39 @@ const Navbar = () => {
           <div
             className={`nav-dropdown ${categoryOpen ? 'open' : ''}`}
             onMouseEnter={() => setCategoryOpen(true)}
-            onMouseLeave={() => setCategoryOpen(false)}
+            onMouseLeave={() => {
+              setCategoryOpen(false);
+              setActiveMobileSection(null);
+            }}
           >
             <button className="nav-link dropdown-trigger">
               Categories
               <ChevronDown size={14} className="chevron-icon" />
             </button>
-            <div className="dropdown-menu">
-              <span className="dropdown-coming-soon">✨ Coming Soon</span>
+            <div className="dropdown-menu megamenu">
+              <div className="megamenu-content">
+                {categoriesData.map((section) => (
+                  <div key={section.id} className={`megamenu-section ${activeMobileSection === section.id ? 'active' : ''}`}>
+                    <h3 onClick={(e) => toggleMobileSection(section.id, e)} className="megamenu-title">
+                      {section.icon}
+                      {section.title}
+                      <ChevronDown size={14} className="mobile-chevron" />
+                    </h3>
+                    <ul className="megamenu-list">
+                      {section.items.map((item) => (
+                        <li 
+                          key={item.name} 
+                          className="megamenu-item"
+                          onClick={() => handleCategoryClick(item.name)}
+                        >
+                          {item.icon}
+                          <span>{item.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           
