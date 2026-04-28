@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import OrdersPage from './pages/OrdersPage';
+import ChatBot from './components/ChatBot';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <ChatBot />
       </div>
     </AuthProvider>
   );
