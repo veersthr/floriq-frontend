@@ -1,44 +1,17 @@
 import { Flower, Heart, Sparkles, Leaf } from 'lucide-react';
+import TriptychSection from '../components/TriptychSection';
 import './AboutPage.css';
 
 const AboutPage = () => {
   return (
     <div className="about-page">
-      {/* 🌸 Elegant Hero Section */}
-      <section className="about-hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-content container">
-          <span className="hero-subtitle">Our Journey</span>
-          <h1>Crafting Emotions Through Nature</h1>
-          <p>Where every petal tells a story and every bouquet inspired a memory.</p>
-        </div>
-      </section>
+      {/* 🌸 Top Image Section */}
+      <div className="about-top-image">
+        <img src="/assets/about-hero.jpg" alt="About Floriq" />
+      </div>
 
-      {/* 🌸 Our Story - Split Section */}
-      <section className="story-section container">
-        <div className="story-image">
-          <img 
-            src="https://images.unsplash.com/photo-1519219013753-2947702f7411?auto=format&fit=crop&q=80&w=800" 
-            alt="Florist at work" 
-            className="premium-image" 
-          />
-        </div>
-        <div className="story-text">
-          <h2 className="section-title">The Floriq Philosophy</h2>
-          <p>Founded in a small garden workshop, Floriq was born from a simple belief: that flowers are the world's most eloquent language. We don't just sell bouquets; we curate moments of connection.</p>
-          <p>Our expert florists hand-select every bloom, ensuring that from the morning dew to your doorstep, the essence of freshness remains untouched.</p>
-          <div className="story-stats">
-            <div className="stat-item">
-              <span className="stat-number">10k+</span>
-              <span className="stat-label">Bouquets Delivered</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">50+</span>
-              <span className="stat-label">Artisan Partners</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 🌸 Triptych Scroll-Reveal Story Section */}
+      <TriptychSection />
 
       {/* 🌸 Philosophy Cards */}
       <section className="philosophy-section">

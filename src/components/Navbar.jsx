@@ -100,7 +100,6 @@ const Navbar = () => {
       <div className="nav-container">
         {/* Brand */}
         <Link to="/" className="brand-logo">
-          <img src="assets/logo.png" alt="Floriq" className="logo-img" />
           <div className="brand-info">
             <span className="brand-title">Floriq</span>
             <span className="brand-tagline">where feelings bloom</span>

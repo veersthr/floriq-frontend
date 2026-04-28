@@ -1,0 +1,248 @@
+/* ============================================================
+   TRIPTYCH SECTION  — Floriq Brand Storytelling
+   ============================================================ */
+
+.trq-section {
+  overflow: hidden;
+  background: #FAF6F0;
+  padding: 9rem 0 0;
+}
+
+/* ── Brand Text Block ──────────────────────────────────────── */
+.trq-text {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 7rem;
+  text-align: center;
+}
+
+/* Individual children start hidden; parent being observed */
+.trq-eyebrow,
+.trq-heading,
+.trq-para,
+.trq-stats {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity  1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stagger delays */
+.trq-eyebrow { transition-delay: 0.05s; }
+.trq-heading  { transition-delay: 0.18s; }
+.trq-s1       { transition-delay: 0.32s; }
+.trq-s2       { transition-delay: 0.46s; }
+.trq-s3       { transition-delay: 0.62s; }
+
+/* Revealed state */
+.trq-revealed .trq-eyebrow,
+.trq-revealed .trq-heading,
+.trq-revealed .trq-para,
+.trq-revealed .trq-stats {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trq-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 1.2rem;
+}
+
+.trq-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-text-main);
+  margin-bottom: 2rem;
+}
+
+.trq-para {
+  font-size: 1.08rem;
+  line-height: 1.88;
+  color: var(--color-text-light);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Stats ─────────────────────────────────────────────────── */
+.trq-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.trq-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.trq-stat-num {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.trq-stat-lbl {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.trq-stat-sep {
+  width: 1px;
+  height: 52px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+/* ── Triptych Photos ───────────────────────────────────────── */
+.trq-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  width: 100%;
+  height: 68vh;
+  min-height: 480px;
+}
+
+/* Each piece clips its inner image for parallax */
+.trq-piece {
+  position: relative;
+  overflow: hidden;
+  background: #e8d5c0;
+}
+
+/* Inner image — slightly oversized so parallax never reveals edges */
+.trq-piece img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12);
+  will-change: transform;
+  display: block;
+  transition: transform 0.12s linear;
+}
+
+/* Gradient overlay for cinematic depth */
+.trq-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(20, 8, 4, 0.28) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Initial hidden states (before scroll trigger) ─────────── */
+.trq-piece-left {
+  opacity: 0;
+  transform: translateX(-110px) scale(1.05);
+  transition:
+    opacity  1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0s;
+}
+
+.trq-piece-center {
+  opacity: 0;
+  transform: translateY(90px) scale(1.05);
+  transition:
+    opacity  1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0.22s;
+}
+
+.trq-piece-right {
+  opacity: 0;
+  transform: translateX(110px) scale(1.05);
+  transition:
+    opacity  1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0.44s;
+}
+
+/* ── Revealed states ─────────────────────────────────────────  */
+.trq-photos-revealed .trq-piece-left,
+.trq-photos-revealed .trq-piece-center,
+.trq-photos-revealed .trq-piece-right {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Hover zoom for extra polish */
+.trq-piece:hover img {
+  transform: scale(1.16) !important;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Thin gold line separators between pieces */
+.trq-photos {
+  gap: 2px;
+  background: white;
+}
+
+/* ── Responsive ──────────────────────────────────────────────  */
+@media (max-width: 900px) {
+  .trq-text {
+    padding-bottom: 5rem;
+  }
+
+  .trq-photos {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .trq-piece {
+    height: 56vw;
+    min-height: 260px;
+  }
+
+  /* On mobile reuse same animation direction for all pieces */
+  .trq-piece-left,
+  .trq-piece-right {
+    transform: translateY(70px) scale(1.05);
+  }
+
+  .trq-photos-revealed .trq-piece-left,
+  .trq-photos-revealed .trq-piece-right {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .trq-section {
+    padding-top: 6rem;
+  }
+
+  .trq-heading {
+    font-size: 2rem;
+  }
+
+  .trq-stats {
+    gap: 2rem;
+  }
+
+  .trq-stat-num {
+    font-size: 2.2rem;
+  }
+}

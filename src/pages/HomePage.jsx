@@ -1,37 +1,33 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import './HomePage.css';
 import './HomePage.css';
 
 const slides = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?auto=format&fit=crop&w=1600&q=80',
-    heading: 'Elegance in Every Bloom',
-    subtext: 'Discover our curated collection of beautiful, fresh flowers delivered right to your door.',
-    accent: 'rgba(255,105,180,0.18)',
+    image: '/assets/carousel-1.jpg',
+    tagline: 'New Collection',
+    heading: 'Elegance Redefined',
+    subtext: 'Discover our premium, hand-picked collection that brings out your best.',
+    cta: 'EXPLORE NOW',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?auto=format&fit=crop&w=1600&q=80',
-    heading: 'Fresh from the Garden',
-    subtext: 'Hand-picked, sustainably sourced blooms that bring the garden straight into your home.',
-    accent: 'rgba(164,180,148,0.22)',
+    image: '/assets/carousel-2.jpg',
+    tagline: 'Exclusive Quality',
+    heading: 'Crafted For You',
+    subtext: 'Sustainably sourced and thoughtfully designed for the modern aesthetic.',
+    cta: 'Explore Now',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1621628521890-ebbf656c6a32?auto=format&fit=crop&w=1600&q=80',
+    image: '/assets/carousel-3.jpg',
+    tagline: 'Timeless Beauty',
     heading: 'Celebrate Every Moment',
-    subtext: 'From birthdays to anniversaries — let our bouquets speak the words you feel.',
-    accent: 'rgba(255,200,100,0.18)',
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1653262343155-dc4e12bd36fd?auto=format&fit=crop&w=1600&q=80',
-    heading: 'Gift Someone Special',
-    subtext: 'A thoughtful bouquet says more than words. Make someone smile today.',
-    accent: 'rgba(255,130,160,0.18)',
+    subtext: 'Let our timeless pieces speak the words you feel. Shop the new arrivals.',
+    cta: 'EXPLORE NOW',
   },
 ];
 
@@ -62,14 +58,34 @@ const HomePage = () => {
     fetchProducts();
 
     const timer = setInterval(() => {
-      setAnimating(true);
-      setTimeout(() => {
-        setCurrent(prev => (prev + 1) % slides.length);
-        setAnimating(false);
-      }, 400);
+      handleNext();
     }, INTERVAL);
     return () => clearInterval(timer);
   }, []);
+
+  const handleNext = useCallback(() => {
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(prev => (prev + 1) % slides.length);
+      setAnimating(false);
+    }, 400);
+  }, []);
+
+  const handlePrev = () => {
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(prev => (prev - 1 + slides.length) % slides.length);
+      setAnimating(false);
+    }, 400);
+  };
+
+  const goToSlide = (index) => {
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(index);
+      setAnimating(false);
+    }, 400);
+  };
 
   const slide = slides[current];
 
@@ -89,15 +105,35 @@ const HomePage = () => {
 
         {/* Content */}
         <div className={`carousel-content ${animating ? 'fade-out' : 'fade-in'}`}>
+          <span className="tagline">{slide.tagline}</span>
           <h1>{slide.heading}</h1>
           <p>{slide.subtext}</p>
-          <Link to="/shop" className="btn-primary hero-btn">Shop Collection</Link>
+          <Link to="/shop" className="btn-primary hero-btn">{slide.cta}</Link>
+        </div>
+
+        {/* Navigation Contols */}
+        <div className="carousel-arrow left" onClick={handlePrev}>
+          <ChevronLeft size={24} />
+        </div>
+        <div className="carousel-arrow right" onClick={handleNext}>
+          <ChevronRight size={24} />
+        </div>
+
+        {/* Desktop indicator dots */}
+        <div className="carousel-dots">
+          {slides.map((_, i) => (
+            <div
+              key={i}
+              className={`carousel-dot ${i === current ? 'active' : ''}`}
+              onClick={() => goToSlide(i)}
+            />
+          ))}
         </div>
 
 
       </section>
 
-      {/* ── Shop Collection ── */}
+      {/* ── EXPLORE NOW ── */}
       <section className="featured container">
         <div className="section-header text-center">
           <h2>Trending Now</h2>

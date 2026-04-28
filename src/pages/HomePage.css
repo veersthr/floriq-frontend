@@ -1,9 +1,14 @@
+.home-page {
+  /* Offset the global .main-content margin to sit under the navbar */
+  margin-top: -70px;
+}
+
 /* ============================================================
    HERO CAROUSEL
    ============================================================ */
 .hero-carousel {
   position: relative;
-  height: 88vh;
+  height: 100vh;
   min-height: 520px;
   overflow: hidden;
   display: flex;
@@ -31,7 +36,7 @@
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 6s ease-out;
+    transform 6s ease-out;
 }
 
 /* Dark gradient overlay */
@@ -50,8 +55,63 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+}
 
-  background: linear-gradient(180deg, white, transparent, transparent, transparent, transparent, transparent, transparent);
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-arrow.left {
+  left: 20px;
+}
+
+.carousel-arrow.right {
+  right: 20px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: #fff;
+  transform: scale(1.3);
 }
 
 /* ── Slide Content ── */
@@ -73,37 +133,58 @@
   transform: translateY(14px);
 }
 
+.carousel-content .tagline {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  display: block;
+}
+
 .carousel-content h1 {
   color: #fff;
-  font-size: 3.8rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 800;
   line-height: 1.15;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 18px rgba(0,0,0,0.3);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   letter-spacing: -0.5px;
 }
 
 .carousel-content p {
-  font-size: 1.15rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
-  color: rgba(255,255,255,0.9);
-  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  font-size: 1.25rem;
+  font-weight: 250;
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   line-height: 1.7;
 }
 
 .hero-btn {
   font-size: 1rem;
-  padding: 0.9rem 2.2rem;
-  border-radius: 50px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 20px rgba(255,105,180,0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem 2.5rem;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.hero-btn:hover {
+  background-color: #fff;
+  color: var(--color-text-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 
 
 /* ============================================================
-   FEATURED / SHOP COLLECTION SECTION
+   FEATURED / EXPLORE NOW SECTION
    ============================================================ */
 .section-header {
   margin-bottom: var(--spacing-lg);
@@ -171,6 +252,11 @@
     font-size: 0.95rem;
   }
 
-  .carousel-arrow.left  { left: 12px; }
-  .carousel-arrow.right { right: 12px; }
+  .carousel-arrow.left {
+    left: 12px;
+  }
+
+  .carousel-arrow.right {
+    right: 12px;
+  }
 }
