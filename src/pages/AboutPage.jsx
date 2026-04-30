@@ -8,6 +8,23 @@ const AboutPage = () => {
       {/* 🌸 Top Image Section */}
       <div className="about-top-image">
         <img src="/assets/about-hero.jpg" alt="About Floriq" />
+        <div className="about-hero-overlay">
+          <div className="about-hero-content animate-on-load">
+            <h1 className="about-hero-title">About Us</h1>
+            <p className="about-hero-text">
+              At Floriq, we believe flowers are more than just gifts—they are emotions beautifully expressed. From celebrating love and birthdays to offering comfort and appreciation, our handcrafted bouquets are designed to make every moment special.
+            </p>
+            <p className="about-hero-text">
+              We specialize in fresh, high-quality flowers arranged with creativity and care. Each bouquet is thoughtfully crafted to ensure elegance, freshness, and long-lasting beauty. Whether you're looking for something classic or modern, we have a perfect arrangement for every occasion.
+            </p>
+            <p className="about-hero-text">
+              Our mission is simple: to deliver happiness through flowers. With easy online ordering, reliable delivery, and a passion for perfection, we make it effortless for you to share your feelings with your loved ones.
+            </p>
+            <p className="about-hero-text">
+              Let us help you turn every occasion into a memorable experience.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* 🌸 Triptych Scroll-Reveal Story Section */}

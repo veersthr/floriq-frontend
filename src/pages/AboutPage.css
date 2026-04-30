@@ -7,6 +7,7 @@
 .about-top-image {
   width: 100%;
   height: 100vh;
+  position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -19,6 +20,59 @@
   object-fit: cover;
   display: block;
 }
+
+.about-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.about-hero-content {
+  max-width: 900px;
+  text-align: center;
+  color: white;
+}
+
+.about-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5vw, 4.0rem);
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.about-hero-text {
+  font-size: 1.2rem;
+  font-weight: 300; /* Bold/high weighted text as requested */
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8); /* Enhance readability over image */
+}
+
+.animate-on-load {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUpFadeIn 1.2s ease-out forwards;
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* ===== STORY SECTION ===== */
 .story-section {
