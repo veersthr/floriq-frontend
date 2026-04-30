@@ -44,7 +44,7 @@
   font-family: 'Playfair Display', serif;
   font-size: clamp(3rem, 5vw, 4.0rem);
   font-weight: 600;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.0rem;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 
