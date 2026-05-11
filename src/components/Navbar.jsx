@@ -42,7 +42,7 @@ const categoriesData = [
   }
 ];
 
-const Navbar = () => {
+const Navbar = ({ brandRef, showIntro }) => {
   const { itemCount } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile main menu
@@ -51,6 +51,8 @@ const Navbar = () => {
   const [activeMobileSection, setActiveMobileSection] = useState(null);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
+
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,6 +66,15 @@ const Navbar = () => {
     setActiveMobileSection(null);
     setIsSearchExpanded(false);
   }, [location.pathname]);
+
+  // Scroll event listener for transparent to solid/blurred navbar transition
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -96,12 +107,12 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`navbar-header ${categoryOpen ? 'megamenu-active' : ''}`}>
+    <header className={`navbar-header ${categoryOpen ? 'megamenu-active' : ''} ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         {/* Brand */}
-        <Link to="/" className="brand-logo">
+        <Link to="/" className="brand-logo" style={{ opacity: showIntro ? 0 : 1, transition: 'opacity 0.3s ease' }}>
           <div className="brand-info">
-            <span className="brand-title">Floriq</span>
+            <span className="brand-title" ref={brandRef}>Floriq</span>
             <span className="brand-tagline">where feelings bloom</span>
           </div>
         </Link>

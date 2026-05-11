@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -12,13 +13,18 @@ import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import OrdersPage from './pages/OrdersPage';
 import ChatBot from './components/ChatBot';
+import IntroAnimation from './components/IntroAnimation';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+  const navbarBrandRef = useRef(null);
+
   return (
     <AuthProvider>
+      {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} navbarBrandRef={navbarBrandRef} />}
       <div className="app-container">
-        <Navbar />
+        <Navbar brandRef={navbarBrandRef} showIntro={showIntro} />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
